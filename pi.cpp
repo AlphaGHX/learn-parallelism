@@ -7,6 +7,7 @@
 
 int main(int argc, char **argv)
 {
+  // dev test
   int comm_sz, my_rank;
   MPI_Init(&argc, &argv);
   MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
