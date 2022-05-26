@@ -9,6 +9,9 @@ struct list_node_s {
   list_node_s(int a, list_node_s *b) : data(a), next(b) {}
 };
 
+int threads = 3;
+pthread_rwlock_t *rwlock;
+
 list_node_s *head, *c;
 int len;
 
@@ -81,9 +84,18 @@ void mem(int value) {
   return;
 }
 
+// insert(int value);
+// del(int value);
+// mem(int value);
+// print();
+
 int main() {
   char op;
   int value;
+
+  pthread_t tid[threads];
+
+  pthread_rwlock_init(rwlock, NULL);
 
   while (cin >> op) {
     switch (op) {
