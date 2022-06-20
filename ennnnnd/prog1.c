@@ -1,5 +1,7 @@
 // 发送函数 MPI_Send 与接收函数 MPI_Recv。
 // 请开4个进程运行
+// mpicc prog1.c -o prog1.out
+// mpiexec -oversubscribe -n 4 ./prog1.out
 
 #include <mpi.h>
 #include <stdio.h>

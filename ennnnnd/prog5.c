@@ -1,12 +1,13 @@
 // pthread_create 与互斥、信号量
 // 示例程序为累加程序
+// gcc prog5.c -o prog5.out
+// ./prog5.out 2 1000
 
 #include <pthread.h>
 #include <semaphore.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <sys/time.h>
-
-#include <cstdio>
-#include <cstdlib>
 
 #define ll long long
 
@@ -16,10 +17,10 @@ pthread_mutex_t mutex;
 sem_t sem;
 ll sum;
 
-struct Part {
+typedef struct {
   ll left;
   ll right;
-};
+} Part;
 
 // 互斥量实现
 void *add_mutex(void *argv) {
@@ -58,9 +59,9 @@ int main(int argc, char **argv) {
   ll num = atoll(argv[2]);
   ll part = num / threads;
   double timeuse;
-  timeval t1, t2;
-  pthread_t *tid = new pthread_t[threads];
-  Part *parts = new Part[threads];
+  struct timeval t1, t2;
+  pthread_t *tid = (pthread_t *)malloc(threads * sizeof(pthread_t));
+  Part *parts = (Part *)malloc(threads * sizeof(Part));
   pthread_mutex_init(&mutex, NULL);  // 初始化互斥锁
   sem_init(&sem, 0, 0);  // 初始化信号量sem，设置为局部信号量，初始值为0
 

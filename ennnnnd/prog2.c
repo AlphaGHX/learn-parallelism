@@ -1,8 +1,9 @@
 // 发送与接收函数、tag 及命令行参数
+// mpicc prog2.c -o prog2.out
+// mpiexec -oversubscribe -n 4 ./prog2.out test
 
 #include <mpi.h>
-
-#include <cstdio>
+#include <stdio.h>
 
 int main(int argc, char **argv) {
   int comm_sz, my_rank;

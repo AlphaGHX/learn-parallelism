@@ -1,10 +1,11 @@
 // 示例：散射函数 MPI_Scatter 与聚集函数 MPI_Gather
 // 示例程序为向量求和
+// mpicc prog4.c -o prog4.out
+// mpiexec -oversubscribe -n 5 ./prog4.out
 
 #include <mpi.h>
-
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 
 int main() {
   int comm_sz, my_rank;
@@ -14,12 +15,12 @@ int main() {
 
   int n = 10;
 
-  int *x = new int[n];
-  int *y = new int[n];
-  int *z = new int[n];
+  int *x = malloc(sizeof(int) * n);
+  int *y = malloc(sizeof(int) * n);
+  int *z = malloc(sizeof(int) * n);
 
-  int *recvx = new int[2];
-  int *recvy = new int[2];
+  int *recvx = malloc(sizeof(int) * 2);
+  int *recvy = malloc(sizeof(int) * 2);
 
   if (my_rank == 0) {
     for (int i = 0; i < n; ++i) {
@@ -33,7 +34,7 @@ int main() {
   MPI_Scatter(x, 2, MPI_INT, recvx, 2, MPI_INT, 0, MPI_COMM_WORLD);
   MPI_Scatter(y, 2, MPI_INT, recvy, 2, MPI_INT, 0, MPI_COMM_WORLD);
 
-  int *partAdd = new int[2];
+  int *partAdd = malloc(sizeof(int) * 2);
 
   for (int i = 0; i < 2; ++i) {
     partAdd[i] = recvx[i] + recvy[i];

@@ -1,10 +1,12 @@
 // 归约函数 MPI_Reduce 使用
 // 示例程序为累加程序
+// mpicc prog3.c -o prog3.out
+// mpiexec -oversubscribe -n 4 ./prog3.out
 
 #include <mpi.h>
 
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #define ll long long
 
 int main(int argc, char **argv) {
