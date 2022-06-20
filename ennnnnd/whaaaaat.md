@@ -82,6 +82,7 @@ int pthread_mutex_destroy(pthread_mutex_t *)
 
 int sem_destroy(sem_t *)
 
+// /dev/shm
 // 内存共享
 // 这样 buffer 就可以写东西进去，并且是共享内存，其他程序可以读取。
 int shm_fd = shm_open("buffer", O_CREAT | O_RDWR, 0666);
@@ -119,6 +120,11 @@ sem_t *empty = sem_open("empty", O_RDONLY);
       factor = -factor;
     }
   }
+
+#pragma omp critical
+{
+  加锁区域
+}
 ```
 
 # 进程与信号系列
